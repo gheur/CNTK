@@ -6,6 +6,9 @@ EnsureProperties(CNTK_VERSION;CMAKE_BUILD_TYPE)
 
 include(../../../Tools/cmake/csharp_common.cmake REQUIRED)
 
+set(binary_name_suffix -${CNTK_VERSION}$<${is_debug}:d>)
+set(binary_name Cntk.Core.CSBinding${binary_name_suffix})
+
 set(source_filenames
     Helper.cs
     Utils.cs
@@ -123,7 +126,7 @@ add_custom_target(
         
     COMMAND dotnet build ${CMAKE_CURRENT_SOURCE_DIR}/CNTKLibraryManagedDll.csproj /p:OutputPathPrefix=${CMAKE_CURRENT_BINARY_DIR} /p:Configuration=${config} /t:Restore
     COMMAND dotnet build ${CMAKE_CURRENT_SOURCE_DIR}/CNTKLibraryManagedDll.csproj /p:OutputPathPrefix=${CMAKE_CURRENT_BINARY_DIR} /p:Configuration=${config} /t:Build
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/CSharpBindings/Cntk.Core.CSBinding-2.5.1d.so ${CMAKE_CURRENT_BINARY_DIR}/AnyCPU/${config}
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/CSharpBindings/Cntk.Core.CSBinding${binary_name_suffix}${CMAKE_SHARED_LIBRARY_SUFFIX} ${CMAKE_CURRENT_BINARY_DIR}/AnyCPU/${config}
 )
 
 add_dependencies(CNTKLibraryManagedDll CSharpBindings)

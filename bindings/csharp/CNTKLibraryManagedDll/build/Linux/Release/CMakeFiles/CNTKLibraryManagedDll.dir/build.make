@@ -56,7 +56,7 @@ include CMakeFiles/CNTKLibraryManagedDll.dir/progress.make
 CMakeFiles/CNTKLibraryManagedDll: CSharpBindings/Cntk.Core.CSBinding-2.5.1.so
 	dotnet build /local/bindings/csharp/CNTKLibraryManagedDll/CNTKLibraryManagedDll.csproj /p:OutputPathPrefix=/local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release /p:Configuration=Release /t:Restore
 	dotnet build /local/bindings/csharp/CNTKLibraryManagedDll/CNTKLibraryManagedDll.csproj /p:OutputPathPrefix=/local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release /p:Configuration=Release /t:Build
-	/usr/bin/cmake -E copy /local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/CSharpBindings/Cntk.Core.CSBinding-2.5.1d.so /local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/AnyCPU/Release
+	/usr/bin/cmake -E copy /local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/CSharpBindings/Cntk.Core.CSBinding-2.5.1.so /local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/AnyCPU/Release
 
 CNTKLibraryManagedDll: CMakeFiles/CNTKLibraryManagedDll
 CNTKLibraryManagedDll: CMakeFiles/CNTKLibraryManagedDll.dir/build.make
