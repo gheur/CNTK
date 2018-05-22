@@ -8,7 +8,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/common.cmake REQUIRED)
 if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")
     EnsureTools(dotnet;)
 elseif(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
-    EnsureTools(msbuild;)
+    EnsureTools(dotnet;)
 else()
     message(FATAL_ERROR "The CMAKE_HOST_SYSTEM_NAME value of '${CMAKE_HOST_SYSTEM_NAME}' is not recognized.")
 endif()
@@ -20,7 +20,7 @@ set(CMAKE_CONFIGURATION_TYPES Debug;Release)
 if(DEFINED CMAKE_BUILD_TYPE AND NOT CMAKE_BUILD_TYPE STREQUAL "")
     set(config "${CMAKE_BUILD_TYPE}")
     string(COMPARE EQUAL "${config}" "Debug" is_debug)
-    
+
 elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
     # This code isn't quite right. What we actually want to do is say that CMAKE_BUILD_TYPE must be defined
     # for any generator that doesn't support the use of CONFIG as a generator expression. I haven't found a way

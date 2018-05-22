@@ -6,7 +6,22 @@ EnsureProperties(CNTK_VERSION;CMAKE_BUILD_TYPE)
 
 include(../../../Tools/cmake/csharp_common.cmake REQUIRED)
 
-set(binary_name_suffix -${CNTK_VERSION}$<${is_debug}:d>)
+ADD_SUBDIRECTORY(../Swig CSharpBindings)
+
+# ${source_filenames} (defined below) changes based on configuration. Unfortunately, some cmake generators don't support
+# input based on generator expressions. In the name of supporting the least common denominator, restrict cmake generation
+# to a single configuration. This is standard practice for makefiles but a bit unusual for Visual Studio.
+if(${config} STREQUAL "Debug")
+    set(binary_name_debug_suffix d)
+elseif(${config} STREQUAL "Release")
+    set(binary_name_debug_suffix "")
+else()
+    message(FATAL_ERROR "'CMAKE_BUILD_TYPE' must be 'Debug' or 'Release' ('${CMAKE_BUILD_TYPE}' found)")
+endif()
+
+set(CMAKE_CONFIGURATION_TYPES ${config})
+
+set(binary_name_suffix -${CNTK_VERSION}${binary_name_debug_suffix})
 set(binary_name Cntk.Core.CSBinding${binary_name_suffix})
 
 set(source_filenames
@@ -113,7 +128,25 @@ set(source_filenames
     ../Swig/Generated/${CMAKE_HOST_SYSTEM_NAME}/${config}/VectorPairSizeTDouble.cs
 )
 
-ADD_SUBDIRECTORY(../Swig CSharpBindings)
+if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+    set(post_build_copy_statement 
+        ${CMAKE_COMMAND} 
+        -E 
+        copy 
+        ${CMAKE_CURRENT_BINARY_DIR}/CSharpBindings/Cntk.Core.CSBinding${binary_name_suffix}${CMAKE_SHARED_LIBRARY_SUFFIX} 
+        ${CMAKE_CURRENT_BINARY_DIR}/AnyCPU/${config}
+    )
+elseif(CMAKE_GENERATOR MATCHES "Visual Studio.+")
+    set(post_build_copy_statement 
+        ${CMAKE_COMMAND} 
+        -E 
+        copy_directory 
+        ${CMAKE_CURRENT_BINARY_DIR}/CSharpBindings/x64/${config} 
+        ${CMAKE_CURRENT_BINARY_DIR}/AnyCPU/${config}
+    )
+else()
+    message(FATAL_ERROR "The 'CMAKE_GENERATOR' value '${CMAKE_GENERATOR}' is not supported")
+endif()
 
 add_custom_target(
     CNTKLibraryManagedDll ALL
@@ -126,7 +159,7 @@ add_custom_target(
         
     COMMAND dotnet build ${CMAKE_CURRENT_SOURCE_DIR}/CNTKLibraryManagedDll.csproj /p:OutputPathPrefix=${CMAKE_CURRENT_BINARY_DIR} /p:Configuration=${config} /t:Restore
     COMMAND dotnet build ${CMAKE_CURRENT_SOURCE_DIR}/CNTKLibraryManagedDll.csproj /p:OutputPathPrefix=${CMAKE_CURRENT_BINARY_DIR} /p:Configuration=${config} /t:Build
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_BINARY_DIR}/CSharpBindings/Cntk.Core.CSBinding${binary_name_suffix}${CMAKE_SHARED_LIBRARY_SUFFIX} ${CMAKE_CURRENT_BINARY_DIR}/AnyCPU/${config}
+    COMMAND ${post_build_copy_statement}
 )
 
 add_dependencies(CNTKLibraryManagedDll CSharpBindings)
