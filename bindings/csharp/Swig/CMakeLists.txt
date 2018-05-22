@@ -193,6 +193,7 @@ add_custom_command(
 # |  CS Bindings
 add_library(CSharpBindings SHARED ${native_swig_generated_files})
 
+set_target_properties(CSharpBindings PROPERTIES RUNTIME_OUTPUT_DIRECTORY x64/)
 set_target_properties(CSharpBindings PROPERTIES OUTPUT_NAME ${binary_name})
 set_target_properties(CSharpBindings PROPERTIES PREFIX "")
 

@@ -1,5 +1,5 @@
-# This file contains definitions for C++ settings that impact the Application Binary Interface (ABI) and should
-# be generally applicable across a variety of different projects. Project-specific customizations should be defined
+# This file contains definitions for C++ settings that impact the Application Binary Interface (ABI) that are
+# generally applicable across a variety of different projects. Project-specific customizations should be defined
 # in a separate file.
 
 option( 
@@ -16,13 +16,13 @@ option(
 
 set(CMAKE_CONFIGURATION_TYPES Debug;Release;Release_NoOpt)
 
-# If CMAKE_BUILD_TYPE is defined, we are looking at a single-configuration and can extract information directly from this value.
+# If CMAKE_BUILD_TYPE is defined, we are looking at a single configuration and can extract information directly from this value.
 # If it is not defined, then we need to use a dynamic generator.
 if(DEFINED CMAKE_BUILD_TYPE AND NOT CMAKE_BUILD_TYPE STREQUAL "")
-    string(COMPARE EQUAL "${CMAKE_BUILD_TYPE}" "Debug" is_debug)
-    string(COMPARE EQUAL "${CMAKE_BUILD_TYPE}" "Release_NoOpt" is_release_noopt)
     set(config "${CMAKE_BUILD_TYPE}")
-
+    string(COMPARE EQUAL "${config}" "Debug" is_debug)
+    string(COMPARE EQUAL "${config}" "Release_NoOpt" is_release_noopt)
+    
 elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
     # This code isn't quite right. What we actually want to do is say that CMAKE_BUILD_TYPE must be defined
     # for any generator that doesn't support the use of CONFIG as a generator expression. I haven't found a way
@@ -30,9 +30,9 @@ elseif(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
     message(FATAL_ERROR "'CMAKE_BUILD_TYPE' must be defined")
 
 else()
+    set(config $<CONFIG>)
     set(is_debug $<CONFIG:Debug>)
     set(is_release_noopt $<CONFIG:Release_NoOpt>)
-    set(config $<CONFIG>)
     
 endif()
 
