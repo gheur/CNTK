@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O3 -DNDEBUG  -shared -Wl,-soname,Cntk.Core.CSBinding-2.5.1.so -o Cntk.Core.CSBinding-2.5.1.so CMakeFiles/CSharpBindings.dir/Generated/cntk_cs_wrap.cxx.o  -L/local/bindings/csharp/Swig/../../../build/release/lib -Wl,-rpath,/local/bindings/csharp/Swig/../../../build/release/lib -lCntk.Core-2.5.1 

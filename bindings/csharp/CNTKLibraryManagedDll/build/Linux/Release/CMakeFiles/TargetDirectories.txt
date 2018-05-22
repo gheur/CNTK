@@ -1,0 +1,6 @@
+/local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/CMakeFiles/rebuild_cache.dir
+/local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/CMakeFiles/CNTKLibraryManagedDll.dir
+/local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/CMakeFiles/edit_cache.dir
+/local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/CSharpBindings/CMakeFiles/rebuild_cache.dir
+/local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/CSharpBindings/CMakeFiles/CSharpBindings.dir
+/local/bindings/csharp/CNTKLibraryManagedDll/build/Linux/Release/CSharpBindings/CMakeFiles/edit_cache.dir
