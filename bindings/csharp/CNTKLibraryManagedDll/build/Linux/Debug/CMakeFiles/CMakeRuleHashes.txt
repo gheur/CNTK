@@ -1,3 +1,0 @@
-# Hashes of file build rules.
-53862a41647034ef9c295568e62132b5 /local/bindings/csharp/Swig/Generated/cntk_cs_wrap.h
-1d96670b697888e21396f907ed88b391 CMakeFiles/CNTKLibraryManagedDll

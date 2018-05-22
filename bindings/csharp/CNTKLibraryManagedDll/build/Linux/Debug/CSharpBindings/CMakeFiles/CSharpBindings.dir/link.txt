@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -g -D_DEBUG  -shared -Wl,-soname,Cntk.Core.CSBinding-2.5.1d.so -o Cntk.Core.CSBinding-2.5.1d.so CMakeFiles/CSharpBindings.dir/Generated/cntk_cs_wrap.cxx.o  -L/local/bindings/csharp/Swig/../../../build/debug/lib -Wl,-rpath,/local/bindings/csharp/Swig/../../../build/debug/lib -lCntk.Core-2.5.1d 
