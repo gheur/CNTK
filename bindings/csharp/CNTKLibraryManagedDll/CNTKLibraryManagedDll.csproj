@@ -24,26 +24,12 @@
     <Authors>Microsoft Corporation</Authors>
     <Product>Cntk.Core.Managed</Product>
     <Version>$(CntkVersion)</Version>
-    
+    <PlatformTarget>x64</PlatformTarget>
+     
     <PackageId>Cntk.Core.Managed</PackageId>
     <PackageId Condition="'$(CntkComponentSuffix)'!=''">Cntk.Core.Managed-$(CntkComponentSuffix)</PackageId>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_NoOpt|x64'">
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_CpuOnly|x64'">
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug_CpuOnly|x64'">
-  </PropertyGroup>
-
+  
   <ItemGroup>
     <Compile Include="Helper.cs" />
     <Compile Include="ShimApiClasses\AxisShim.cs" />
