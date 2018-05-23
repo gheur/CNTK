@@ -35,6 +35,7 @@ Readme text
 *.psm1 text
 *.ps text
 *.i text
+*.cmake text
 
 *.sh text eol=lf
 *.awk text eol=lf
