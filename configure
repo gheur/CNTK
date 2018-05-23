@@ -376,11 +376,11 @@ enable_java=$(default_use_java)
 
 function default_use_csharp()
 {
-    if test xdotnet = x
+    if [[ `command -v dotnet` && `command -v swig` && `command -v cmake` ]]
     then
-        echo no
+        echo yes
     else
-        echo yet
+        echo no
     fi
 }
 enable_csharp=$(default_use_csharp)
@@ -401,9 +401,10 @@ function show_help ()
     echo "Usage: configure [options]"
     echo "Options:"
     echo "  -h|--help this help"
+	echo "  --with-buildtype=(debug|release) $(show_default $default_buildtype)"
     echo "  --with-build-top=directory build directory $(show_default $build_top)"
     echo "  --add directory add directory to library search path"
-    echo "  --asgd[=(yes|no)] use ASGD powered by Multiverso $(show_default $(default_use_asgd))"
+    echo "  --asgd[=(yes|no)] use ASGD powered by Multiverso $(show_default ${default_use_asgd})"
     echo "  --cuda[=(yes|no)] use cuda GPU $(show_default $(default_use_cuda))"
     echo "  --python[=(yes|no)] with Python bindings $(show_default $(default_use_python))"
     echo "  --java[=(yes|no)] with Java bindings $(show_default $(default_use_java))"
@@ -420,7 +421,6 @@ function show_help ()
     echo "  --with-mkl[=directory] $(show_default $(find_mkl))"
     echo "  --with-mkl-sequential[=directory] $(show_default $(find_mkl))"
     echo "  --with-openblas[=directory] (experimental) $(show_default $(find_openblas))"
-    echo "  --with-buildtype=(debug|release) $(show_default $default_buildtype)"
     echo "  --with-kaldi[=directory] $(show_default $(find_kaldi))"
     echo "  --with-opencv[=directory] $(show_default $(find_opencv))"
     echo "  --with-libzip[=directory] $(show_default $(find_libzip))"
@@ -622,7 +622,7 @@ do
         --csharp*)
             if test x$optarg = xyes || test x$optarg = xno
             then
-                enable_python=$optarg
+                enable_csharp=$optarg
             else
                 echo "Invalid value for --csharp $optarg"
                 show_help
@@ -1100,7 +1100,7 @@ then
     fi
 fi
 
-if ( test $enable_java = yes || test $enable_python = yes || test $enable_sharp = yes ) && test x$swig_path = x
+if ( test $enable_java = yes || test $enable_python = yes || test $enable_csharp = yes ) && test x$swig_path = x
 then
     swig_path=$(find_swig)
     if test x$swig_path = x
@@ -1299,6 +1299,9 @@ if test $enable_java = yes ; then
         echo JAVA_SUPPORT=true >> $config
         echo JDK_PATH=$jdk_path >> $config
     fi
+fi
+if test $enable_csharp = yes ; then
+    echo CSHARP_SUPPORT=true >> $config
 fi
 if test x$kaldi_path != x ; then
     echo KALDI_PATH=$kaldi_path >> $config
