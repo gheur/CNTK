@@ -186,17 +186,15 @@ namespace CNTK
 
     inline const wchar_t* DeviceKindName(DeviceKind deviceKind)
     {
-        return L"BugBug";
-        (deviceKind);
-        // BugBug switch (deviceKind)
-        // BugBug {
-        // BugBug case DeviceKind::CPU:
-        // BugBug     return L"CPU";
-        // BugBug case DeviceKind::GPU:
-        // BugBug     return L"GPU";
-        // BugBug default:
-        // BugBug     LogicError("Unknown DeviceKind.");
-        // BugBug }
+        switch (deviceKind)
+        {
+        case DeviceKind::CPU:
+            return L"CPU";
+        case DeviceKind::GPU:
+            return L"GPU";
+        default:
+            LogicError("Unknown DeviceKind.");
+        }
     }
 
     ///
