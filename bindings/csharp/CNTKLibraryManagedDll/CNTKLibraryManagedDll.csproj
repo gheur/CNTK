@@ -133,6 +133,7 @@
     <Compile Include="..\Swig\Generated\$(PlatformName)\$(FlavorName)\StreamInformation.cs" Link="Generated\StreamInformation.cs" />
     <Compile Include="..\Swig\Generated\$(PlatformName)\$(FlavorName)\StringVector.cs" Link="Generated\StringVector.cs" />
     <Compile Include="..\Swig\Generated\$(PlatformName)\$(FlavorName)\SWIGTYPE_p_int8_t.cs" Link="Generated\SWIGTYPE_p_int8_t.cs" />
+	<Compile Include="..\Swig\Generated\$(PlatformName)\$(FlavorName)\SWIGTYPE_p_int16_t.cs" Link="Generated\SWIGTYPE_p_int16_t.cs" />
     <Compile Include="..\Swig\Generated\$(PlatformName)\$(FlavorName)\SWIGTYPE_p_void.cs" Link="Generated\SWIGTYPE_p_void.cs" />
     <Compile Include="..\Swig\Generated\$(PlatformName)\$(FlavorName)\TraceLevel.cs" Link="Generated\TraceLevel.cs" />
     <Compile Include="..\Swig\Generated\$(PlatformName)\$(FlavorName)\Trainer.cs" Link="Generated\Trainer.cs" />
